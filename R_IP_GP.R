@@ -17,6 +17,11 @@ eix <- R_eigenX$vectors[1:length(R_eigen$vectors[,1]),1:min(400, floor(T/4))] #g
 R_eigenY <- eigen((Ky+t(Ky))/2)          #compute values and corresponding vectores
 eig_Ky <- head(R_eigenY$values,min(200, floor(T/5)))        #get the first N values
 eiy <- R_eigenY$vectors[1:length(R_eigenY$vectors[,1]),1:min(200, floor(T/5))] #get the first N eigenvectors
-#vektoren stimmen überein aber sind manchmal gespiegelt
+#vektoren sind manchmal gespiegelt
 
-#TODO next: ask what about the vectors also implememnt covfunc as cell
+covfunc <- list('covsum',list('covSEard','covNoise')) #in Matlab als cell gespeichert
+
+
+
+
+
