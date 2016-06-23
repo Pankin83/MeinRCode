@@ -19,7 +19,12 @@ eig_Ky <- head(R_eigenY$values,min(200, floor(T/5)))        #get the first N val
 eiy <- R_eigenY$vectors[1:length(R_eigenY$vectors[,1]),1:min(200, floor(T/5))] #get the first N eigenvectors
 #vektoren sind manchmal gespiegelt
 
+#covfunc als list in list
 covfunc <- list('covsum',list('covSEard','covNoise')) #in Matlab als cell gespeichert
+
+
+#logtheta0 = [log(width)*ones(D,1); 0; log(sqrt(0.1))];
+logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
 
 
 
