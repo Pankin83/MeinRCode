@@ -2,11 +2,11 @@
 #library(R.matlab)
 #path <- system.file('mat-files', package="R.matlab")
 
-#pathname <- file.path(path, 'variables_IF_GP_saved.mat')
+#pathname <- file.path(path, 'variables_IF_GP_saved_v2.mat')
 #testdata <- readMat(pathname)
 #get("x", testdata)
 
-list2env(testdata,envir = .GlobalEnv,as.list(.GlobalEnv)) #hier noch enviroment ändern -> Jonas fragen
+#list2env(testdata,envir = .GlobalEnv,as.list(.GlobalEnv)) #hier noch enviroment ändern -> Jonas fragen
 
 #Kx
 R_eigenX <- eigen((Kx+t(Kx))/2)          #compute values and corresponding vectores
@@ -22,9 +22,18 @@ eiy <- R_eigenY$vectors[1:length(R_eigenY$vectors[,1]),1:min(200, floor(T/5))] #
 #covfunc als list in list
 covfunc <- list('covsum',list('covSEard','covNoise')) #in Matlab als cell gespeichert
 
-
-#logtheta0 = [log(width)*ones(D,1); 0; log(sqrt(0.1))];
 logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
+
+
+#here should be the olg gpml box
+
+
+
+
+
+#P1_x = (eye(T) - Kz_x*pdinv(Kz_x + exp(2*logtheta_x(end))*eye(T)));
+P1_x <- (diag(1,T) - Kz.x * solve(Kz.x + exp(2*logtheta.x[length(logtheta.x)])*diag(1,T)))
+
 
 
 
