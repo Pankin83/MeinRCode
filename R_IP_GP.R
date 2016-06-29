@@ -11,7 +11,7 @@
 #Kx
 R_eigenX <- eigen((Kx+t(Kx))/2)          #compute values and corresponding vectores
 eig_Kx <- head(R_eigenX$values,min(400, floor(T/4)))        #get the first N values
-eix <- R_eigenX$vectors[1:length(R_eigen$vectors[,1]),1:min(400, floor(T/4))] #get the first N eigenvectors
+eix <- R_eigenX$vectors[1:length(R_eigenX$vectors[,1]),1:min(400, floor(T/4))] #get the first N eigenvectors
 
 #Ky
 R_eigenY <- eigen((Ky+t(Ky))/2)          #compute values and corresponding vectores
@@ -24,8 +24,19 @@ covfunc <- list('covsum',list('covSEard','covNoise')) #in Matlab als cell gespei
 
 logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
 
+#here should be the old gpml box
 
-#here should be the olg gpml box
+
+## used sum in sum(max(eig_Kx) * Thresh)) to get the value not matrix
+IIx <-  which(eig_Kx > sum(max(eig_Kx) * Thresh))
+eig_Kx <- eig_Kx[IIx]
+eix = eix[,IIx];
+
+IIy <-  which(eig_Ky > sum(max(eig_Ky) * Thresh))
+eig_Ky <- eig_Ky[IIy]
+eiy = eiy[,IIy];
+#
+
 
 
 
@@ -35,17 +46,13 @@ logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
 
 #rest of the code...
 
-
-#P1_x = (eye(T) - Kz_x*pdinv(Kz_x + exp(2*logtheta_x(end))*eye(T)));
 P1_x <- (diag(1,T) - Kz.x %*% solve(Kz.x + exp(2*logtheta.x[length(logtheta.x)])*diag(1,T)))
 Kxz <- P1_x %*% Kx %*% t(P1_x)
 P1_y <- (diag(1,T) - Kz.y %*% solve(Kz.y + exp(2*logtheta.y[length(logtheta.y)])*diag(1,T)));
 Kyz <- P1_y %*% Ky %*% t(P1_y)
 
-## calculate the statistic
 Sta <- sum(diag((Kxz %*% Kyz)))
 
-## degrees of freedom
 df_x <- sum(diag(diag(1,T) - P1_x))
 df_y <- sum(diag(diag(1,T) - P1_y))
 
