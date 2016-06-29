@@ -31,10 +31,25 @@ logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
 
 
 
+
+
+#rest of the code...
+
+
 #P1_x = (eye(T) - Kz_x*pdinv(Kz_x + exp(2*logtheta_x(end))*eye(T)));
-P1_x <- (diag(1,T) - Kz.x * solve(Kz.x + exp(2*logtheta.x[length(logtheta.x)])*diag(1,T)))
+P1_x <- (diag(1,T) - Kz.x %*% solve(Kz.x + exp(2*logtheta.x[length(logtheta.x)])*diag(1,T)))
+Kxz <- P1_x %*% Kx %*% t(P1_x)
+P1_y <- (diag(1,T) - Kz.y %*% solve(Kz.y + exp(2*logtheta.y[length(logtheta.y)])*diag(1,T)));
+Kyz <- P1_y %*% Ky %*% t(P1_y)
 
+## calculate the statistic
+Sta <- sum(diag((Kxz %*% Kyz)))
 
+## degrees of freedom
+df_x <- sum(diag(diag(1,T) - P1_x))
+df_y <- sum(diag(diag(1,T) - P1_y))
+
+          
 
 
 
