@@ -35,10 +35,13 @@ eix = eix[,IIx];
 IIy <-  which(eig_Ky > sum(max(eig_Ky) * Thresh))
 eig_Ky <- eig_Ky[IIy]
 eiy = eiy[,IIy];
-#
 
 
+#[logtheta_y, fvals_y, iter_y] = minimize(logtheta0, 'gpr_multi', -350, covfunc, z, 2*sqrt(T) *eiy * diag(sqrt(eig_Ky))/sqrt(eig_Ky(1)));
 
+#für function feval: install.packages("PopED") library(PopED)
+
+source("minimize.r")
 
 
 
