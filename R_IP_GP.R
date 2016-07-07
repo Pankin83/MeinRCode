@@ -20,7 +20,7 @@ eiy <- R_eigenY$vectors[1:length(R_eigenY$vectors[,1]),1:min(200, floor(T/5))] #
 #vektoren sind manchmal gespiegelt
 
 #covfunc als list in list
-covfunc <- list('covsum',list('covSEard','covNoise')) #in Matlab als cell gespeichert
+covfunc <- list('covSum',list('covSEard','covNoise')) #in Matlab als cell gespeichert
 
 logtheta0 = matrix(c(log(width) * matrix(1,D,1), 0, log(sqrt(0.1))),ncol = 1)
 
@@ -42,6 +42,10 @@ eiy = eiy[,IIy];
 #für function feval: install.packages("PopED") library(PopED)
 
 source("minimize.r")
+
+
+
+
 
 
 

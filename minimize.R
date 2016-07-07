@@ -9,7 +9,7 @@
 #path <- system.file('mat-files', package="R.matlab")
 #pathname <- file.path(path, 'variables_IF_GP_saved_v3_minimize.mat')
 #testdata <- readMat(pathname)
-
+##list2env(testdata,envir = .GlobalEnv,as.list(.GlobalEnv))
 
 #für function feval: install.packages("PopED"), library(PopED)
 
