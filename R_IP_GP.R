@@ -1,12 +1,12 @@
 #install.packages("R.matlab")
 #library(R.matlab)
-#path <- system.file('mat-files', package="R.matlab")
+path <- system.file('mat-files', package="R.matlab")
 
-#pathname <- file.path(path, 'variables_IF_GP_saved_v2.mat')
-#testdata <- readMat(pathname)
+pathname <- file.path(path, 'variables_IF_GP_saved_v2.mat')
+testdata <- readMat(pathname)
 #get("x", testdata)
 
-#list2env(testdata,envir = .GlobalEnv,as.list(.GlobalEnv)) #hier noch enviroment ändern -> Jonas fragen
+list2env(testdata,envir = .GlobalEnv,as.list(.GlobalEnv)) #hier noch enviroment ändern -> Jonas fragen
 
 #Kx
 R_eigenX <- eigen((Kx+t(Kx))/2)          #compute values and corresponding vectores
