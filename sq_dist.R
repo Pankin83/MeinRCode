@@ -4,7 +4,7 @@
 
 sq_dist <- function(x){
 
-print(x)
+# print(x)
 
 D = dim(x)[1]
 n = dim(x)[2]
